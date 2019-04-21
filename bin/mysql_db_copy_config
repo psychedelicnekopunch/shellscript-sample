@@ -1,0 +1,4 @@
+#!/bin/sh
+
+MYSQL_USER="username"
+MYSQL_PASSWORD="password"

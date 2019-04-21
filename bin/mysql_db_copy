@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd `dirname $0`
+d=`pwd`
+
+source $d/mysql_db_copy_config
+
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD your_database_name > dump.sql
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e 'drop database `your_database_name_copy`'
+mysqladmin -u $MYSQL_USER -p$MYSQL_PASSWORD create your_database_name_copy
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD your_database_name_copy < dump.sql
+
+rm -f $d/dump.sql
+
+echo "created database 'your_database_name_copy'"

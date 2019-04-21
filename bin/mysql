@@ -1,0 +1,6 @@
+#!/bin/sh
+
+read -sp "MySQL Password: " pass
+mysql -u root -p$pass -e '
+	show databases;
+'
