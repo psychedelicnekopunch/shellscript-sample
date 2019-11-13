@@ -5,11 +5,11 @@ d=`pwd`
 
 source $d/mysql_db_copy_config
 
-mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD your_database_name > dump.sql
-mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e 'drop database `your_database_name_copy`'
-mysqladmin -u $MYSQL_USER -p$MYSQL_PASSWORD create your_database_name_copy
-mysql -u $MYSQL_USER -p$MYSQL_PASSWORD your_database_name_copy < dump.sql
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DBNAME > dump.sql
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e 'drop database `'$MYSQL_DBNAME'_copy`'
+mysqladmin -u $MYSQL_USER -p$MYSQL_PASSWORD create $MYSQL_DBNAME'_copy'
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DBNAME'_copy' < dump.sql
 
 rm -f $d/dump.sql
 
-echo "created database 'your_database_name_copy'"
+echo "created database '"$MYSQL_DBNAME"_copy'"
