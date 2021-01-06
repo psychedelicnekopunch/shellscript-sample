@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# echo $1
+
+str=$1
+arr=($(echo $str | tr "." "\n"))
+
+echo ${arr[0]}
+echo ${arr[1]}
+echo ${arr[2]}
