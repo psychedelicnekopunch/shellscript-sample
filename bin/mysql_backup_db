@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cd `dirname $0`
+d=`pwd`
+
+source $d/config
+
+
+# バックアップの保存期間（days）
+period=7
+
+# バックアップ保存用ディレクトリの指定
+dirpath="/var/backup/mysql"
+
+# ファイル名を指定する(※ファイル名で日付がわかるようにしておきます)
+filename=`date +%y%m%d`
+
+# 指定したDBのスキーマおよびデータをすべて吐き出す
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DB_NAME --single-transaction > $dirpath/$MYSQL_DB_NAME-$filename.sql
+
+# パーミッション変更
+chmod 700 $dirpath/$MYSQL_DB_NAME-$filename.sql
+
+# 保存期間を過ぎたバックアップを削除
+oldfile=`date --date "$period days ago" +%y%m%d`
+rm -f $dirpath/$oldfile.sql
+rm -f $dirpath/$MYSQL_DB_NAME-$oldfile.sql
