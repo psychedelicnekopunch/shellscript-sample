@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ssh -i "~/.ssh/$2" ec2-user@$1
+
+# read -p "IP Address: " ipaddress
+# read -p "Certificartion: " cert
+# ssh -i "~/.ssh/$cert" ec2-user@$ipaddress
